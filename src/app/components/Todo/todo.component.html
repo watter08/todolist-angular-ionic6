@@ -1,0 +1,18 @@
+
+  <ion-card *ngIf="TodoCategory" class="CardTodoListCategory">
+    <ion-card-header [style.background]="TodoCategory.Color">            
+      <ion-item class="TodoListItem"><ion-icon name="ellipse"></ion-icon> <ion-card-title class="ion-padding"> {{ TodoCategory.Name ?? CategoryNotName }} </ion-card-title></ion-item>
+    </ion-card-header>     
+      <cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350">
+        <ion-list>
+          <ion-item *cdkVirtualFor="let item of TodoList | TodoByCategoryPipe:TodoCategory.Id ">
+            <ion-card class="TodoItem"> 
+              <ion-card-header>
+                <ion-card-title [class]="item?.Priority?.Name ?? 'NotBorder'" [style.color]="item?.Priority?.Color ?? '#fff'">{{item.ItemName}}</ion-card-title>
+                <ion-card-subtitle>{{item.ItemDueDate}}</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-item>
+        </ion-list>
+      </cdk-virtual-scroll-viewport>
+  </ion-card>

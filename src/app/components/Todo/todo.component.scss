@@ -1,0 +1,57 @@
+  $red: #ea5353;
+  $cyan: #45d3d3;
+  $orange: #fcaf4a;
+  $blue: #549ef2;
+  $varyDarkBlue: #4c4e61;
+  $grayishBlue: #a3a5ae;
+  $veryLightGray: #fafafa;
+  $weight1: 200;
+  $weight2: 400;
+  $weight3: 600;
+
+
+.CardTodoListCategory {
+  height: 700px !important;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px rgba(0,0,0,0.19);
+  justify-content: center;
+  align-items: center;
+}
+
+.TodoListItem {
+  border-radius: 1rem;
+}
+
+
+.TodoItem {
+  border-radius: .5rem; 
+}
+
+.blue {
+  border-top: 5px solid $blue;
+}
+
+.NotBorder {
+  padding-top: 10px;
+  border-top: 5px solid $veryLightGray !important;
+}
+
+.Baja {
+  padding-top: 10px;
+  border-top: 5px solid $cyan;
+}
+
+.Media {
+  padding-top: 10px;
+  border-top: 5px solid $orange !important;
+}
+.Alta {
+  padding-top: 10px;
+  border-top: 5px solid $red;
+}
+
+
+cdk-virtual-scroll-viewport {
+  height: 100%;
+  width: 100%;
+}
