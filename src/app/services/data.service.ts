@@ -1,4 +1,10 @@
+import { Storage } from '@ionic/storage-angular';
 import { Injectable } from '@angular/core';
+
+const NotData = Object.freeze({
+   NotDataString : '',
+   NotDataNumber : 0,
+})
 
 export interface Message {
   fromName: string;
@@ -19,6 +25,39 @@ export interface ITodoList {
   ItemCategoryId:number;
 }
 
+export class TodoList {
+  Id:number;
+  ItemName: string;
+  ItemDescription:string;
+  ItemDueDate:Date;
+  Priority:ITodoListPriority;
+  Category:ITodoListCategory;
+  ItemPriorityId:number;
+  ItemCategoryId:number;
+
+  constructor(
+    Id:number,
+    ItemName: string,
+    ItemDescription:string,
+    ItemDueDate:Date,
+    Priority:ITodoListPriority,
+    Category:ITodoListCategory,
+    ItemPriorityId:number,
+    ItemCategoryId:number
+    ){
+
+      this.Id = Id ??= NotData.NotDataNumber;
+      this.ItemName = ItemName ??= NotData.NotDataString;
+      this.ItemDescription = ItemDescription ??= NotData.NotDataString;
+      this.ItemDueDate = ItemDueDate ??= new Date();
+      this.Priority = Priority ??= null;
+      this.Category = Category ??= null;
+      this.ItemPriorityId = ItemPriorityId ??= NotData.NotDataNumber;
+      this.ItemCategoryId = ItemCategoryId ??= NotData.NotDataNumber;
+
+  }
+}
+
 export interface ITodoListCategory{
   Id:number;
   Name:string;
@@ -35,6 +74,8 @@ export interface ITodoListPriority{
   providedIn: 'root'
 })
 export class DataService {
+
+  public Store:Storage | null = null;
 
   public TodoListCategory:Array<ITodoListCategory> = [
     {
@@ -60,7 +101,7 @@ export class DataService {
     {
       Id:5,
       Name:'Tareas',
-      Color:'#FAF8F9'
+      Color:'#5583EE'
     },
   ]
 
@@ -82,156 +123,57 @@ export class DataService {
     },
   ]
   public TodoList:ITodoList[] = [
-    {
-      Id:1,
-      ItemName: 'GYM',
-      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-      ItemDueDate:new Date(),
-      ItemPriorityId:1,
-      ItemCategoryId:1,
-      Category:null,
-      Priority:null,
-    },
-    {
-      Id:2,
-      ItemName: 'Limpiar Casa',
-      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-      ItemDueDate:new Date(),
-      ItemPriorityId:1,
-      ItemCategoryId:1,
-      Category:null,
-      Priority:null,
-    },
-    {
-      Id:3,
-      ItemName: 'Generacion Dinero',
-      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-      ItemDueDate:new Date(),
-      ItemPriorityId:2,
-      ItemCategoryId:2,
-      Category:null,
-      Priority:null,
-    },
-    {
-      Id:4,
-      ItemName: 'Hacer Ejercicios',
-      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-      ItemDueDate:new Date(),
-      ItemPriorityId:3,
-      ItemCategoryId:3,
-      Category:null,
-      Priority:null,
-    },
-    {
-      Id:5,
-      ItemName: 'Meditar',
-      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-      ItemDueDate:new Date(),
-      ItemPriorityId:5,
-      ItemCategoryId:5,
-      Category:null,
-      Priority:null,
-    },
-    {
-      Id:1,
-      ItemName: 'GYM',
-      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-      ItemDueDate:new Date(),
-      ItemPriorityId:1,
-      ItemCategoryId:1,
-      Category:null,
-      Priority:null,
-    },
-    {
-      Id:2,
-      ItemName: 'Limpiar Casa',
-      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-      ItemDueDate:new Date(),
-      ItemPriorityId:1,
-      ItemCategoryId:1,
-      Category:null,
-      Priority:null,
-    },
-    {
-      Id:3,
-      ItemName: 'Generacion Dinero',
-      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-      ItemDueDate:new Date(),
-      ItemPriorityId:2,
-      ItemCategoryId:2,
-      Category:null,
-      Priority:null,
-    },
-    {
-      Id:4,
-      ItemName: 'Hacer Ejercicios',
-      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-      ItemDueDate:new Date(),
-      ItemPriorityId:3,
-      ItemCategoryId:3,
-      Category:null,
-      Priority:null,
-    },
-    {
-      Id:5,
-      ItemName: 'Meditar',
-      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-      ItemDueDate:new Date(),
-      ItemPriorityId:5,
-      ItemCategoryId:5,
-      Category:null,
-      Priority:null,
-    },
-    {
-      Id:1,
-      ItemName: 'GYM',
-      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-      ItemDueDate:new Date(),
-      ItemPriorityId:1,
-      ItemCategoryId:1,
-      Category:null,
-      Priority:null,
-    },
-    {
-      Id:2,
-      ItemName: 'Limpiar Casa',
-      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-      ItemDueDate:new Date(),
-      ItemPriorityId:1,
-      ItemCategoryId:1,
-      Category:null,
-      Priority:null,
-    },
-    {
-      Id:3,
-      ItemName: 'Generacion Dinero',
-      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-      ItemDueDate:new Date(),
-      ItemPriorityId:2,
-      ItemCategoryId:2,
-      Category:null,
-      Priority:null,
-    },
-    {
-      Id:4,
-      ItemName: 'Hacer Ejercicios',
-      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-      ItemDueDate:new Date(),
-      ItemPriorityId:3,
-      ItemCategoryId:3,
-      Category:null,
-      Priority:null,
-    },
-    {
-      Id:5,
-      ItemName: 'Meditar',
-      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-      ItemDueDate:new Date(),
-      ItemPriorityId:5,
-      ItemCategoryId:5,
-      Category:null,
-      Priority:null,
-    },
+    // {
+    //   Id:1,
+    //   ItemName: 'GYM',
+    //   ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
+    //   ItemDueDate:new Date(),
+    //   ItemPriorityId:1,
+    //   ItemCategoryId:1,
+    //   Category:null,
+    //   Priority:null,
+    // },
+    // {
+    //   Id:2,
+    //   ItemName: 'Limpiar Casa',
+    //   ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
+    //   ItemDueDate:new Date('12/12/2233'),
+    //   ItemPriorityId:1,
+    //   ItemCategoryId:1,
+    //   Category:null,
+    //   Priority:null,
+    // },
+    // {
+    //   Id:3,
+    //   ItemName: 'Generacion Dinero',
+    //   ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
+    //   ItemDueDate:new Date(),
+    //   ItemPriorityId:2,
+    //   ItemCategoryId:2,
+    //   Category:null,
+    //   Priority:null,
+    // },
+    // {
+    //   Id:4,
+    //   ItemName: 'Hacer Ejercicios',
+    //   ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
+    //   ItemDueDate:new Date(),
+    //   ItemPriorityId:3,
+    //   ItemCategoryId:3,
+    //   Category:null,
+    //   Priority:null,
+    // },
+    // {
+    //   Id:5,
+    //   ItemName: 'Meditar',
+    //   ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
+    //   ItemDueDate:new Date(),
+    //   ItemPriorityId:5,
+    //   ItemCategoryId:5,
+    //   Category:null,
+    //   Priority:null,
+    // },
+    
   ]
 
 
@@ -294,7 +236,9 @@ export class DataService {
     }
   ];
 
-  constructor() { }
+  constructor() {
+    this.Init();
+   }
 
   public getMessages(): Message[] {
     return this.messages;
@@ -325,4 +269,25 @@ export class DataService {
     return this.TodoListCategory.find((a:ITodoListCategory) => a.Id === id);
   }
 
+   async Init() {
+    const store = new Storage();
+    await store.create();
+    this.Store = store;
+  }
+
+  public setStateStorage(key:string , value : any){
+    this.Store?.set(key, value);
+  }
+
+  public getStateStorage(key:string){
+    return this.Store?.get(key);
+  }
+
+  public setRemoveStorageKey(key:string){
+    this.Store?.remove(key);
+  }
+
+  public setClearStorage() {
+    this.Store?.clear();
+  }
 }

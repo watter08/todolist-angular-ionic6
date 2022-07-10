@@ -17,7 +17,8 @@
   justify-content: center;
   align-items: center;
 }
-
+.not-allowed {cursor: not-allowed;}
+.pointer {cursor: pointer !important;}
 .TodoListItem {
   border-radius: 1rem;
 }
@@ -25,8 +26,20 @@
 
 .TodoItem {
   border-radius: .5rem; 
+  cursor: pointer !important;
 }
 
+.TodoItem:hover {
+  background-color: #fff9f9;
+}
+
+.TodoItem:hover ion-card-header ion-card-title  {
+  color: #41C7AF !important;
+}
+
+.card-title {
+  font-size: clamp(1.2rem , 2vw , 2rem);
+}
 .blue {
   border-top: 5px solid $blue;
 }
@@ -45,6 +58,7 @@
   padding-top: 10px;
   border-top: 5px solid $orange !important;
 }
+
 .Alta {
   padding-top: 10px;
   border-top: 5px solid $red;
@@ -54,4 +68,9 @@
 cdk-virtual-scroll-viewport {
   height: 100%;
   width: 100%;
+}
+.modal_info {
+  background: #FCF9F2 !important;
+  padding: 50px 100px;
+  text-align: center;
 }

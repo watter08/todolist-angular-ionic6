@@ -1,12 +1,12 @@
 
-  <ion-card *ngIf="TodoCategory" class="CardTodoListCategory">
-    <ion-card-header [style.background]="TodoCategory.Color">            
-      <ion-item class="TodoListItem"><ion-icon name="ellipse"></ion-icon> <ion-card-title class="ion-padding"> {{ TodoCategory.Name ?? CategoryNotName }} </ion-card-title></ion-item>
+  <ion-card *ngIf="Category" class="CardTodoListCategory">
+    <ion-card-header [style.background]="Category.Color">            
+      <ion-item class="TodoListItem"><ion-icon name="ellipse"></ion-icon> <ion-card-title class="card-title ion-padding"> {{ Category.Name ?? CategoryNotName }} </ion-card-title></ion-item>
     </ion-card-header>     
       <cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350">
         <ion-list>
-          <ion-item *cdkVirtualFor="let item of TodoList | TodoByCategoryPipe:TodoCategory.Id ">
-            <ion-card class="TodoItem"> 
+          <ion-item *cdkVirtualFor="let item of TodoList | TodoByCategoryPipe:Category.Id  ">
+            <ion-card class="TodoItem" (click)="SelectTodo(item)" [style.cursor]="'pointer'"> 
               <ion-card-header>
                 <ion-card-title [class]="item?.Priority?.Name ?? 'NotBorder'" [style.color]="item?.Priority?.Color ?? '#fff'">{{item.ItemName}}</ion-card-title>
                 <ion-card-subtitle>{{item.ItemDueDate}}</ion-card-subtitle>
@@ -16,3 +16,58 @@
         </ion-list>
       </cdk-virtual-scroll-viewport>
   </ion-card>
+
+  <ion-modal  [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Tarea</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="CloseItem(false)" [style.color]="'red'">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding modal_info">
+        <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+          <ion-item lines="full">
+            <ion-label position="floating">Titulo:</ion-label>
+            <ion-input formControlName="ItemName" type="text"></ion-input>
+          </ion-item>
+          <!-- Error messages -->
+          <!-- <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.required">
+            Name is required.
+          </span>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.minlength">
+            Name should be min 2 chars long.
+          </span> -->
+
+          <ion-item lines="full">
+            <ion-label position="floating">Descripcion:</ion-label>
+            <ion-input formControlName="ItemDescription" type="text"></ion-input>
+          </ion-item>       
+
+          <ion-list>
+            <ion-item>
+              <ion-label>Categoria:</ion-label>
+              <ion-select placeholder="Seleccionar Categoria"  cancel-text="Cancelar Opcion" formControlName="ItemPriorityId">
+                <ion-select-option *ngFor="let categoria of TodoCategory" [value]="categoria.Id">{{categoria.Name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>Prioridad:</ion-label>
+              <ion-select interface="action-sheet" placeholder="Seleccionar Prioridad" cancel-text="Cancelar Opcion" formControlName="ItemCategoryId">
+                <ion-select-option *ngFor="let relevancia of TodoPriority" [value]="relevancia.Id">{{relevancia.Name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+
+          <ion-item lines="inset">
+            <ion-label position="floating">Fecha Finalizacion:</ion-label>
+            <br>
+            <ion-datetime formControlName="ItemDueDate"  presentation="date"></ion-datetime>
+          </ion-item>
+
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
