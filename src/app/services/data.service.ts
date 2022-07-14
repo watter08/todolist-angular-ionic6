@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 const NotData = Object.freeze({
    NotDataString : '',
+   NotDataNumberOne : 1,
    NotDataNumber : 0,
 })
 
@@ -52,10 +53,11 @@ export class TodoList {
       this.ItemDueDate = ItemDueDate ??= new Date();
       this.Priority = Priority ??= null;
       this.Category = Category ??= null;
-      this.ItemPriorityId = ItemPriorityId ??= NotData.NotDataNumber;
-      this.ItemCategoryId = ItemCategoryId ??= NotData.NotDataNumber;
+      this.ItemPriorityId = ItemPriorityId ??= NotData.NotDataNumberOne;
+      this.ItemCategoryId = ItemCategoryId ??= NotData.NotDataNumberOne;
 
   }
+  
 }
 
 export interface ITodoListCategory{
@@ -236,9 +238,7 @@ export class DataService {
     }
   ];
 
-  constructor() {
-    this.Init();
-   }
+  constructor() {   }
 
   public getMessages(): Message[] {
     return this.messages;
@@ -269,25 +269,77 @@ export class DataService {
     return this.TodoListCategory.find((a:ITodoListCategory) => a.Id === id);
   }
 
-   async Init() {
-    const store = new Storage();
+  async InitializarStore(){    
+    let store = new Storage();
     await store.create();
     this.Store = store;
+    let valuo = [    
+      {
+      Id:1,
+      ItemName: 'GYM',
+      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
+      ItemDueDate:new Date(),
+      ItemPriorityId:1,
+      ItemCategoryId:1,
+      Category:null,
+      Priority:null,
+    },
+    {
+      Id:2,
+      ItemName: 'Limpiar Casa',
+      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
+      ItemDueDate:new Date('12/12/2233'),
+      ItemPriorityId:1,
+      ItemCategoryId:1,
+      Category:null,
+      Priority:null,
+    },
+    {
+      Id:3,
+      ItemName: 'Generacion Dinero',
+      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
+      ItemDueDate:new Date(),
+      ItemPriorityId:2,
+      ItemCategoryId:2,
+      Category:null,
+      Priority:null,
+    },
+    {
+      Id:4,
+      ItemName: 'Hacer Ejercicios',
+      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
+      ItemDueDate:new Date(),
+      ItemPriorityId:3,
+      ItemCategoryId:3,
+      Category:null,
+      Priority:null,
+    },
+    {
+      Id:5,
+      ItemName: 'Meditar',
+      ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
+      ItemDueDate:new Date(),
+      ItemPriorityId:5,
+      ItemCategoryId:5,
+      Category:null,
+      Priority:null,
+    },]
+    this.Store.set('TodoList',JSON.stringify(''));
   }
 
-  public setStateStorage(key:string , value : any){
-    this.Store?.set(key, value);
+   public async setStateStorage(key:string , value : any) {    
+    await this.Store?.set(key, value);
   }
 
-  public getStateStorage(key:string){
-    return this.Store?.get(key);
+  public async getStateStorage(key:string) {    
+    return await this.Store?.get(key);
   }
 
-  public setRemoveStorageKey(key:string){
-    this.Store?.remove(key);
+  public async setRemoveStorageKey(key:string) {
+    await this.Store?.remove(key);
   }
 
-  public setClearStorage() {
-    this.Store?.clear();
+  public async setClearStorage() {
+    await this.Store?.clear();
   }
 }
