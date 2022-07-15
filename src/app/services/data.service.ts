@@ -7,13 +7,6 @@ const NotData = Object.freeze({
    NotDataNumber : 0,
 })
 
-export interface Message {
-  fromName: string;
-  subject: string;
-  date: string;
-  id: number;
-  read: boolean;
-}
 
 export interface ITodoList {
   Id:number;
@@ -124,129 +117,13 @@ export class DataService {
       Color:'#D8334A'
     },
   ]
-  public TodoList:ITodoList[] = [
-    // {
-    //   Id:1,
-    //   ItemName: 'GYM',
-    //   ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-    //   ItemDueDate:new Date(),
-    //   ItemPriorityId:1,
-    //   ItemCategoryId:1,
-    //   Category:null,
-    //   Priority:null,
-    // },
-    // {
-    //   Id:2,
-    //   ItemName: 'Limpiar Casa',
-    //   ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-    //   ItemDueDate:new Date('12/12/2233'),
-    //   ItemPriorityId:1,
-    //   ItemCategoryId:1,
-    //   Category:null,
-    //   Priority:null,
-    // },
-    // {
-    //   Id:3,
-    //   ItemName: 'Generacion Dinero',
-    //   ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-    //   ItemDueDate:new Date(),
-    //   ItemPriorityId:2,
-    //   ItemCategoryId:2,
-    //   Category:null,
-    //   Priority:null,
-    // },
-    // {
-    //   Id:4,
-    //   ItemName: 'Hacer Ejercicios',
-    //   ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-    //   ItemDueDate:new Date(),
-    //   ItemPriorityId:3,
-    //   ItemCategoryId:3,
-    //   Category:null,
-    //   Priority:null,
-    // },
-    // {
-    //   Id:5,
-    //   ItemName: 'Meditar',
-    //   ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
-    //   ItemDueDate:new Date(),
-    //   ItemPriorityId:5,
-    //   ItemCategoryId:5,
-    //   Category:null,
-    //   Priority:null,
-    // },
-    
-  ]
+  public TodoList:ITodoList[] = [ ]
 
 
-  public messages: Message[] = [
-    {
-      fromName: 'Matt Chorsey',
-      subject: 'New event: Trip to Vegas',
-      date: '9:32 AM',
-      id: 0,
-      read: false
-    },
-    {
-      fromName: 'Lauren Ruthford',
-      subject: 'Long time no chat',
-      date: '6:12 AM',
-      id: 1,
-      read: false
-    },
-    {
-      fromName: 'Jordan Firth',
-      subject: 'Report Results',
-      date: '4:55 AM',
-      id: 2,
-      read: false
-    },
-    {
-      fromName: 'Bill Thomas',
-      subject: 'The situation',
-      date: 'Yesterday',
-      id: 3,
-      read: false
-    },
-    {
-      fromName: 'Joanne Pollan',
-      subject: 'Updated invitation: Swim lessons',
-      date: 'Yesterday',
-      id: 4,
-      read: false
-    },
-    {
-      fromName: 'Andrea Cornerston',
-      subject: 'Last minute ask',
-      date: 'Yesterday',
-      id: 5,
-      read: false
-    },
-    {
-      fromName: 'Moe Chamont',
-      subject: 'Family Calendar - Version 1',
-      date: 'Last Week',
-      id: 6,
-      read: false
-    },
-    {
-      fromName: 'Kelly Richardson',
-      subject: 'Placeholder Headhots',
-      date: 'Last Week',
-      id: 7,
-      read: false
-    }
-  ];
+
 
   constructor() {   }
 
-  public getMessages(): Message[] {
-    return this.messages;
-  }
-
-  public getMessageById(id: number): Message {
-    return this.messages[id];
-  }
 
   public getTodoList():Array<ITodoList> {
     return this.TodoList;
@@ -299,8 +176,8 @@ export class DataService {
       ItemName: 'Generacion Dinero',
       ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
       ItemDueDate:new Date(),
-      ItemPriorityId:2,
-      ItemCategoryId:2,
+      ItemPriorityId:1,
+      ItemCategoryId:1,
       Category:null,
       Priority:null,
     },
@@ -309,8 +186,8 @@ export class DataService {
       ItemName: 'Hacer Ejercicios',
       ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
       ItemDueDate:new Date(),
-      ItemPriorityId:3,
-      ItemCategoryId:3,
+      ItemPriorityId:1,
+      ItemCategoryId:1,
       Category:null,
       Priority:null,
     },
@@ -319,12 +196,12 @@ export class DataService {
       ItemName: 'Meditar',
       ItemDescription:'hello lkadskljsakl aksjdhakjsdhka jahsgdjkaghs kajsdhkjasdh',
       ItemDueDate:new Date(),
-      ItemPriorityId:5,
-      ItemCategoryId:5,
+      ItemPriorityId:1,
+      ItemCategoryId:1,
       Category:null,
       Priority:null,
     },]
-    this.Store.set('TodoList',JSON.stringify(''));
+    this.Store.set('TodoList',JSON.stringify(valuo));
   }
 
    public async setStateStorage(key:string , value : any) {    

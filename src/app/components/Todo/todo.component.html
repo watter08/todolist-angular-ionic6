@@ -1,38 +1,37 @@
+<ion-content class="MainContainer">
 
-    <ion-grid>
-      <ion-row>
-        <ion-col 
-        *ngFor="let Category of TodoCategory" 
-        sizeSm="6" sizeMd="4" sizeLg="4" sizeXl="3" 
-        class="CardTodoListCategory"
-        >
-          <ion-card class="CardTodoListCategory">
-            <ion-card-header [style.background]="Category.Color">            
-              <ion-item class="TodoListItem">
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let Category of TodoCategory" sizeSm="6" sizeMd="4" sizeLg="3" sizeXl="3">
+        <ion-card class="CardTodoListCategory">
+          <ion-card-header [style.background]="Category.Color">
+            <ion-item class="TodoListItem">
               <ion-card-title class="card-title"> {{ Category.Name ?? CategoryNotName }} </ion-card-title>
-              <ion-icon slot="end" class="icon2r icon-add-todo"  name="add-circle-outline" (click)="OpenOrSelectFormToCreate(null)"></ion-icon>
-        
+              <ion-icon slot="end" class="icon2r icon-add-todo" name="add-circle-outline"
+                (click)="OpenOrSelectFormToCreate(null)"></ion-icon>  
             </ion-item>
-            </ion-card-header>     
-              <cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350">
-                <ion-list>
-                  <ion-item  *cdkVirtualFor="let item of TodoList | TodoByCategoryPipe:Category.Id" class="card-item">
-                    <ion-card class="TodoItem ion-card" [class]="item?.Priority?.Name ?? 'NotBorder'"  (click)="OpenOrSelectFormToCreate(item)" [style.cursor]="'pointer'"> 
-                      <ion-card-header >
-                        <ion-card-title [style.color]="item?.Priority?.Color ?? '#fff'"  >{{item.ItemName}}</ion-card-title>
-                        <ion-card-subtitle [style.color]="item?.Priority?.Color ?? '#fff'" >{{item.ItemDueDate}}</ion-card-subtitle>
-                      </ion-card-header>
-                    </ion-card>
-                  </ion-item>
-                </ion-list>
-              </cdk-virtual-scroll-viewport>
-          </ion-card>
-        
+          </ion-card-header>
+          <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="50" maxBufferPx="300">
+            <ion-list>
+              <ion-item *cdkVirtualFor="let item of TodoList | TodoByCategoryPipe:Category.Id" class="card-item">
+                <ion-card class="TodoItem ion-card" [class]="item?.Priority?.Name ?? 'NotBorder'"
+                  (click)="OpenOrSelectFormToCreate(item)" [style.cursor]="'pointer'">
+                  <ion-card-header>
+                    <ion-card-title [style.color]="item?.Priority?.Color ?? '#fff'">{{item.ItemName}}</ion-card-title>
+                    <ion-card-subtitle [style.color]="item?.Priority?.Color ?? '#fff'">{{item.ItemDueDate}}
+                    </ion-card-subtitle>
+                  </ion-card-header>
+                </ion-card>
+              </ion-item>
+            </ion-list>
+          </cdk-virtual-scroll-viewport>
+        </ion-card>
   
-</ion-col>
-</ion-row>
-</ion-grid>
-  <ion-modal  [isOpen]="isModalOpen">
+  
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-modal [isOpen]="isModalOpen">
     <ng-template>
       <ion-header>
         <ion-toolbar>
@@ -48,34 +47,38 @@
             <ion-label position="floating">Titulo:</ion-label>
             <ion-input formControlName="ItemName" type="text"></ion-input>
           </ion-item>
-
+  
           <ion-item lines="full">
             <ion-label position="floating">Descripcion:</ion-label>
             <ion-input formControlName="ItemDescription" type="text"></ion-input>
-          </ion-item>       
-
+          </ion-item>
+  
           <ion-list>
             <ion-item>
               <ion-label>Categoria:</ion-label>
-              <ion-select interface="action-sheet" placeholder="Seleccionar Categoria"  cancel-text="Cancelar Opcion" formControlName="ItemCategoryId">
-                <ion-select-option *ngFor="let categoria of TodoCategory" [value]="categoria.Id">{{categoria.Name}}</ion-select-option>
+              <ion-select interface="action-sheet" placeholder="Seleccionar Categoria" cancel-text="Cancelar Opcion"
+                formControlName="ItemCategoryId">
+                <ion-select-option *ngFor="let categoria of TodoCategory" [value]="categoria.Id">{{categoria.Name}}
+                </ion-select-option>
               </ion-select>
             </ion-item>
             <ion-item>
               <ion-label>Prioridad:</ion-label>
-              <ion-select interface="action-sheet" placeholder="Seleccionar Prioridad" cancel-text="Cancelar Opcion" formControlName="ItemPriorityId">
-                <ion-select-option *ngFor="let relevancia of TodoPriority" [value]="relevancia.Id">{{relevancia.Name}}</ion-select-option>
+              <ion-select interface="action-sheet" placeholder="Seleccionar Prioridad" cancel-text="Cancelar Opcion"
+                formControlName="ItemPriorityId">
+                <ion-select-option *ngFor="let relevancia of TodoPriority" [value]="relevancia.Id">{{relevancia.Name}}
+                </ion-select-option>
               </ion-select>
             </ion-item>
           </ion-list>
-
+  
           <ion-item lines="inset">
             <ion-label position="floating">Fecha Finalizacion:</ion-label>
             <br>
             <ion-input type="date" formControlName="ItemDueDate"></ion-input>
             <!-- <ion-datetime formControlName="ItemDueDate"  presentation="date"></ion-datetime> -->
           </ion-item>
-
+  
           <ion-toolbar>
             <ion-buttons slot="primary">
               <ion-button (click)="submitForm()">
@@ -87,3 +90,5 @@
       </ion-content>
     </ng-template>
   </ion-modal>
+
+</ion-content>
